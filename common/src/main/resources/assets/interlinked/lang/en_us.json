@@ -1,0 +1,10 @@
+{
+  "interlinked.title": "Interlinked",
+  "interlinked.title.menu": "Interlinked Main Menu",
+
+  "interlinked.gui.update_available": "A newer version of Interlinked is available",
+  "interlinked.gui.manage_teams": "Manage Teams...",
+  "interlinked.gui.configure": "Configure...",
+  "interlinked.gui.report_bugs": "Report a bug...",
+  "interlinked.gui.ask_questions": "Ask questions..."
+}

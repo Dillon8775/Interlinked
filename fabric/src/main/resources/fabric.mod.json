@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}+${mc_version}",
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": [
+    "Dillon8775"
+  ],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issues}"
+  },
+  "license": "${license}",
+  "icon": "${logo}.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.dillon.interlinked.Interlinked"
+    ],
+    "client": [
+      "net.dillon.interlinked.ClientInterlinked"
+    ],
+    "modmenu": [
+      "net.dillon.interlinked.impl.ModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "interlinked.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": ">=26.3-alpha.1",
+    "java": ">=${java_version}",
+    "fabric-api": "*",
+    "balm-fabric": ">=${balm_version}",
+    "dillonlib": ">=${dillonlib_version}"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "yacl": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "${discord}"
+      }
+    }
+  }
+}
