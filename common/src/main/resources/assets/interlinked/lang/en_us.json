@@ -1,10 +1,16 @@
 {
   "interlinked.title": "Interlinked",
+  "interlinked.title.tooltip": "Configure Interlinked.",
   "interlinked.title.menu": "Interlinked Main Menu",
 
   "interlinked.gui.update_available": "A newer version of Interlinked is available",
   "interlinked.gui.manage_teams": "Manage Teams...",
   "interlinked.gui.configure": "Configure...",
   "interlinked.gui.report_bugs": "Report a bug...",
-  "interlinked.gui.ask_questions": "Ask questions..."
+  "interlinked.gui.ask_questions": "Ask questions...",
+
+  "interlinked.options.client": "Client",
+  "interlinked.options.client.description": "Client options for Interlinked.",
+  "interlinked.options.menu_button": "Menu Button",
+  "interlinked.options.menu_button.description": "Determines where the Interlinked menu button should display.\n\nEverywhere → §7in the default position on the pause screen and title screen§r§f\n\nTitle Only → §7only on the title screen§r§f\n\nOFF → §7do not display the menu button at all. You should only disable this if you have another way of accessing the menu, via Mod Menu or (Neo)Forge's mod list."
 }
