@@ -62,7 +62,7 @@ public class MainMenuScreen extends OptionsSubScreen {
                 this,
                 ModConstants.VERSION,
                 InterlinkedPlatforms.getPlatform().logoWidth().getWidthModifier(),
-                Identifier.fromNamespaceAndPath("interlinked", "icon.png"),
+                ModConstants.LOGO,
                 ModConstants.HAS_UPDATE
         );
     }
