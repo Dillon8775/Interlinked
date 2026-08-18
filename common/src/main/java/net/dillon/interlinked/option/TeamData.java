@@ -3,15 +3,15 @@ package net.dillon.interlinked.option;
 import java.util.List;
 
 /**
- * Stores team data for interlinked.
- * @param name the name of the team
- * @param playerLeader the leader of the team, who can control team settings
- * @param players all players in the team
- * @param teleLink determines if players should be teleported to team leader if they go so many blocks away
- * @param teleportDistance the maximum distances that players can go away from the team leader before they are teleported to them (default = 300 blocks)
- * @param healthLink links player health with team leader
- * @param heartPerPlayer gives all players an extra heart based on team size
- * @param invLink links all player inventories with team leader
+ * <p>Stores team data for interlinked.
+ * <p>{@code name} - the name of the team
+ * <p>{@code leader} - the leader of the team, who can control team settings
+ * <p>{@code players} all players in the team
+ * <p>{@code teleLink} determines if players should be teleported to team leader if they go so many blocks away
+ * <p>{@code teleLinkDistance} the maximum distances that players can go away from the team leader before they are teleported to them (default = 300 blocks)
+ * <p>{@code healthLink} links player health with team leader
+ * <p>{@code heartPerPlayer} gives all players an extra heart based on team size
+ * <p>{@code invLink} links all player inventories with team leader
  */
 public class TeamData {
     public String name;

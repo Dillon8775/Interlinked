@@ -9,7 +9,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.dillon.dillonlib.util.SimplePermissions;
 import net.dillon.interlinked.helper.ModHelper;
 import net.dillon.interlinked.option.DataNames;
-import net.dillon.interlinked.option.ModCommonOptions;
 import net.dillon.interlinked.option.TeamData;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -19,9 +18,10 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
 
+import static net.dillon.interlinked.option.OptionInstances.updateCommon;
+
 public class InterlinkedTeamCommand {
     private static final String TEAM_NAME_ARGUMENT = "team name";
-    private static final String TEAM_DATA_ARGUMENT = "team data";
     private static final String TEAM_VALUE_ARGUMENT = "value";
     private static final String PLAYER_LEADER_ARGUMENT = "Player Leader";
     private static final String TELE_LINK_ARGUMENT = "Tele-Link (true/false)";
@@ -48,7 +48,7 @@ public class InterlinkedTeamCommand {
                 .then(
                         Commands.argument(TEAM_NAME_ARGUMENT, StringArgumentType.string())
                                 .then(
-                                        Commands.literal("list")
+                                        Commands.literal("listplayers")
                                                 .executes(context ->
                                                         listAllPlayers(
                                                                 context,
@@ -94,7 +94,7 @@ public class InterlinkedTeamCommand {
                                                 )
                                 )
                                 .then(
-                                        Commands.literal("get")
+                                        Commands.literal("printdata")
                                                 .executes(context ->
                                                         getTeamData(
                                                                 context,
@@ -332,11 +332,11 @@ public class InterlinkedTeamCommand {
             boolean healthLink,
             boolean heartPerPlayer,
             boolean invLink) {
-        ModCommonOptions.INSTANCE.update(options -> {
+        updateCommon(common -> {
             if (ModHelper.getTeamByName(name) != null) {
                 context.getSource().sendSuccess(() -> Component.literal("A team with that name already exists."), true);
             } else {
-                options.teams.add(
+                common.teams.add(
                         new TeamData(
                                 name,
                                 playerLeader,
@@ -359,12 +359,12 @@ public class InterlinkedTeamCommand {
      * Deletes an interlinked team.
      */
     private static int deleteTeam(CommandContext<CommandSourceStack> context, String name) {
-        ModCommonOptions.INSTANCE.update(options -> {
+        updateCommon(common -> {
             TeamData team = ModHelper.getTeamByName(name);
             if (team == null) {
                 context.getSource().sendFailure(Component.literal("No team with that name was found."));
             } else {
-                options.teams.remove(team);
+                common.teams.remove(team);
                 context.getSource().sendSuccess(() -> Component.literal("Team \"" + name + "\" was deleted."), true);
             }
         });
@@ -376,49 +376,47 @@ public class InterlinkedTeamCommand {
      * Modifies team data.
      */
     private static int modifyTeamData(CommandContext<CommandSourceStack> context, String name, String argument, Object value) {
-        ModCommonOptions.INSTANCE.update(options -> {
-            TeamData data = ModHelper.getTeamByName(name);
+        TeamData data = ModHelper.getTeamByName(name);
 
-            if (data == null) {
-                context.getSource().sendFailure(
-                        Component.literal("No team with that name was found.")
-                );
-                return;
-            }
-
-            String argumentMessage = "unknown";
-            if (argument.equals(DataNames.LEADER.getId())) {
-                data.setLeader((String) value);
-                argumentMessage = DataNames.LEADER.getName();
-
-            } else if (argument.equals(DataNames.TELE_LINK.getId())) {
-                data.setTeleLink((Boolean) value);
-                argumentMessage = DataNames.TELE_LINK.getName();
-
-            } else if (argument.equals(DataNames.TELE_LINK_DISTANCE.getId())) {
-                data.setTeleLinkDistance((Integer) value);
-                argumentMessage = DataNames.TELE_LINK_DISTANCE.getName();
-
-            } else if (argument.equals(DataNames.HEALTH_LINK.getId())) {
-                data.setHealthLink((Boolean) value);
-                argumentMessage = DataNames.HEALTH_LINK.getName();
-
-            } else if (argument.equals(DataNames.HEART_PER_PLAYER.getId())) {
-                data.setHeartPerPlayer((Boolean) value);
-                argumentMessage = DataNames.HEART_PER_PLAYER.getName();
-
-            } else if (argument.equals(DataNames.INVENTORY_LINK.getId())) {
-                data.setInvLink((Boolean) value);
-                argumentMessage = DataNames.INVENTORY_LINK.getName();
-            }
-
-            String finalArgumentMessage = argumentMessage;
-
-            context.getSource().sendSuccess(
-                    () -> Component.literal("Updated " + finalArgumentMessage + " for team \"" + name + "\"."),
-                    true
+        if (data == null) {
+            context.getSource().sendFailure(
+                    Component.literal("No team with that name was found.")
             );
-        });
+            return 0;
+        }
+
+        String argumentMessage = "unknown";
+        if (argument.equals(DataNames.LEADER.getId())) {
+            data.setLeader((String) value);
+            argumentMessage = DataNames.LEADER.getName();
+
+        } else if (argument.equals(DataNames.TELE_LINK.getId())) {
+            data.setTeleLink((Boolean) value);
+            argumentMessage = DataNames.TELE_LINK.getName();
+
+        } else if (argument.equals(DataNames.TELE_LINK_DISTANCE.getId())) {
+            data.setTeleLinkDistance((Integer) value);
+            argumentMessage = DataNames.TELE_LINK_DISTANCE.getName();
+
+        } else if (argument.equals(DataNames.HEALTH_LINK.getId())) {
+            data.setHealthLink((Boolean) value);
+            argumentMessage = DataNames.HEALTH_LINK.getName();
+
+        } else if (argument.equals(DataNames.HEART_PER_PLAYER.getId())) {
+            data.setHeartPerPlayer((Boolean) value);
+            argumentMessage = DataNames.HEART_PER_PLAYER.getName();
+
+        } else if (argument.equals(DataNames.INVENTORY_LINK.getId())) {
+            data.setInvLink((Boolean) value);
+            argumentMessage = DataNames.INVENTORY_LINK.getName();
+        }
+
+        String finalArgumentMessage = argumentMessage;
+
+        context.getSource().sendSuccess(
+                () -> Component.literal("Updated " + finalArgumentMessage + " for team \"" + name + "\" to \"" + value + "\"."),
+                true
+        );
 
         return 1;
     }
@@ -427,49 +425,47 @@ public class InterlinkedTeamCommand {
      * Modifies a player in a team.
      */
     private static int modifyPlayerData(CommandContext<CommandSourceStack> context, String name, ServerPlayer player, boolean add) {
-        ModCommonOptions.INSTANCE.update(options -> {
-            TeamData data = ModHelper.getTeamByName(name);
+        TeamData data = ModHelper.getTeamByName(name);
 
-            if (data == null) {
+        if (data == null) {
+            context.getSource().sendFailure(
+                    Component.literal("No team with that name was found.")
+            );
+            return 0;
+        }
+
+        String playerName = player.getScoreboardName();
+
+        if (add) {
+            if (data.players.contains(playerName)) {
+                context.getSource().sendSuccess(
+                        () -> Component.literal(playerName + " is already on this team."),
+                        true
+                );
+                return 0;
+            }
+
+            data.players.add(playerName);
+
+            context.getSource().sendSuccess(
+                    () -> Component.literal("Added " + playerName + " to team \"" + name + "\"."),
+                    true
+            );
+        } else {
+            if (!data.players.contains(playerName)) {
                 context.getSource().sendFailure(
-                        Component.literal("No team with that name was found.")
+                        Component.literal(playerName + " is not on this team.")
                 );
-                return;
+                return 0;
             }
 
-            String playerName = player.getScoreboardName();
+            data.players.remove(playerName);
 
-            if (add) {
-                if (data.players.contains(playerName)) {
-                    context.getSource().sendSuccess(
-                            () -> Component.literal(playerName + " is already on this team."),
-                            true
-                    );
-                    return;
-                }
-
-                data.players.add(playerName);
-
-                context.getSource().sendSuccess(
-                        () -> Component.literal("Added " + playerName + " to team \"" + name + "\""),
-                        true
-                );
-            } else {
-                if (!data.players.contains(playerName)) {
-                    context.getSource().sendFailure(
-                            Component.literal(playerName + " is not on this team.")
-                    );
-                    return;
-                }
-
-                data.players.remove(playerName);
-
-                context.getSource().sendSuccess(
-                        () -> Component.literal("Removed " + playerName + " from team \"" + name + "\""),
-                        true
-                );
-            }
-        });
+            context.getSource().sendSuccess(
+                    () -> Component.literal("Removed " + playerName + " from team \"" + name + "\"."),
+                    true
+            );
+        }
 
         return 1;
     }
