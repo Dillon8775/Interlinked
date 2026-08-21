@@ -29,6 +29,7 @@ public class InterlinkedTeamCommand {
     private static final String HEALTH_LINK_ARGUMENT = "Health Link (true/false)";
     private static final String HEART_PER_PLAYER = "Heart Per Player (true/false)";
     private static final String INV_LINK_ARGUMENT = "Inventory Link (true/false)";
+    private static final String FRIENDLY_FIRE_ARGUMENT = "Friendly Fire (true/false)";
     private static final int DEFAULT_TELEPORT_LINK_DISTANCE = 300;
     private static final IntegerArgumentType TELE_LINK_ARGUMENT_TYPE = IntegerArgumentType.integer(10, 10000);
 
@@ -188,6 +189,20 @@ public class InterlinkedTeamCommand {
                                                                                 )
                                                                 )
                                                 )
+                                                .then(
+                                                        Commands.literal(DataNames.FRIENDLY_FIRE.getId())
+                                                                .then(
+                                                                        Commands.argument(TEAM_VALUE_ARGUMENT, BoolArgumentType.bool())
+                                                                                .executes(context ->
+                                                                                        modifyTeamData(
+                                                                                                context,
+                                                                                                StringArgumentType.getString(context, TEAM_NAME_ARGUMENT),
+                                                                                                DataNames.FRIENDLY_FIRE.getId(),
+                                                                                                BoolArgumentType.getBool(context, TEAM_VALUE_ARGUMENT)
+                                                                                        )
+                                                                                )
+                                                                )
+                                                )
                                 )
                                 .then(
                                         Commands.literal("create")
@@ -202,6 +217,7 @@ public class InterlinkedTeamCommand {
                                                                         ),
                                                                         false,
                                                                         DEFAULT_TELEPORT_LINK_DISTANCE,
+                                                                        false,
                                                                         false,
                                                                         false,
                                                                         false
@@ -221,6 +237,7 @@ public class InterlinkedTeamCommand {
                                                                                 DEFAULT_TELEPORT_LINK_DISTANCE,
                                                                                 false,
                                                                                 false,
+                                                                                false,
                                                                                 false
                                                                         )
                                                                 )
@@ -236,6 +253,7 @@ public class InterlinkedTeamCommand {
                                                                                                 ),
                                                                                                 BoolArgumentType.getBool(context, TELE_LINK_ARGUMENT),
                                                                                                 DEFAULT_TELEPORT_LINK_DISTANCE,
+                                                                                                false,
                                                                                                 false,
                                                                                                 false,
                                                                                                 false
@@ -255,6 +273,7 @@ public class InterlinkedTeamCommand {
                                                                                                                 IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
                                                                                                                 false,
                                                                                                                 false,
+                                                                                                                false,
                                                                                                                 false
                                                                                                         )
                                                                                                 )
@@ -271,6 +290,7 @@ public class InterlinkedTeamCommand {
                                                                                                                                 BoolArgumentType.getBool(context, TELE_LINK_ARGUMENT),
                                                                                                                                 IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
                                                                                                                                 BoolArgumentType.getBool(context, HEALTH_LINK_ARGUMENT),
+                                                                                                                                false,
                                                                                                                                 false,
                                                                                                                                 false
                                                                                                                         )
@@ -289,6 +309,7 @@ public class InterlinkedTeamCommand {
                                                                                                                                                 IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
                                                                                                                                                 BoolArgumentType.getBool(context, HEALTH_LINK_ARGUMENT),
                                                                                                                                                 BoolArgumentType.getBool(context, HEART_PER_PLAYER),
+                                                                                                                                                false,
                                                                                                                                                 false
                                                                                                                                         )
                                                                                                                                 )
@@ -306,8 +327,28 @@ public class InterlinkedTeamCommand {
                                                                                                                                                                 IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
                                                                                                                                                                 BoolArgumentType.getBool(context, HEALTH_LINK_ARGUMENT),
                                                                                                                                                                 BoolArgumentType.getBool(context, HEART_PER_PLAYER),
-                                                                                                                                                                BoolArgumentType.getBool(context, INV_LINK_ARGUMENT)
+                                                                                                                                                                BoolArgumentType.getBool(context, INV_LINK_ARGUMENT),
+                                                                                                                                                                false
                                                                                                                                                         )
+                                                                                                                                                )
+                                                                                                                                                .then(
+                                                                                                                                                        Commands.argument(FRIENDLY_FIRE_ARGUMENT, BoolArgumentType.bool())
+                                                                                                                                                                .executes(context ->
+                                                                                                                                                                        createTeam(
+                                                                                                                                                                                context,
+                                                                                                                                                                                StringArgumentType.getString(context, TEAM_NAME_ARGUMENT),
+                                                                                                                                                                                EntityArgument.getPlayer(context, PLAYER_LEADER_ARGUMENT).getScoreboardName(),
+                                                                                                                                                                                List.of(
+                                                                                                                                                                                        EntityArgument.getPlayer(context, PLAYER_LEADER_ARGUMENT).getScoreboardName()
+                                                                                                                                                                                ),
+                                                                                                                                                                                BoolArgumentType.getBool(context, TELE_LINK_ARGUMENT),
+                                                                                                                                                                                IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
+                                                                                                                                                                                BoolArgumentType.getBool(context, HEALTH_LINK_ARGUMENT),
+                                                                                                                                                                                BoolArgumentType.getBool(context, HEART_PER_PLAYER),
+                                                                                                                                                                                BoolArgumentType.getBool(context, INV_LINK_ARGUMENT),
+                                                                                                                                                                                BoolArgumentType.getBool(context, FRIENDLY_FIRE_ARGUMENT)
+                                                                                                                                                                        )
+                                                                                                                                                                )
                                                                                                                                                 )
                                                                                                                                 )
                                                                                                                 )
@@ -331,7 +372,8 @@ public class InterlinkedTeamCommand {
             int teleportDistance,
             boolean healthLink,
             boolean heartPerPlayer,
-            boolean invLink) {
+            boolean invLink,
+            boolean friendlyFire) {
         updateCommon(common -> {
             if (ModHelper.getTeamByName(name) != null) {
                 context.getSource().sendSuccess(() -> Component.literal("A team with that name already exists."), true);
@@ -345,7 +387,8 @@ public class InterlinkedTeamCommand {
                                 teleportDistance,
                                 healthLink,
                                 heartPerPlayer,
-                                invLink
+                                invLink,
+                                friendlyFire
                         )
                 );
                 context.getSource().sendSuccess(() -> Component.literal("Team \"" + name + "\" created."), true);
@@ -408,6 +451,9 @@ public class InterlinkedTeamCommand {
 
         } else if (argument.equals(DataNames.INVENTORY_LINK.getId())) {
             data.setInvLink((Boolean) value);
+            argumentMessage = DataNames.INVENTORY_LINK.getName();
+        } else if (argument.equals(DataNames.FRIENDLY_FIRE.getId())) {
+            data.setFriendlyFire((Boolean) value);
             argumentMessage = DataNames.INVENTORY_LINK.getName();
         }
 
