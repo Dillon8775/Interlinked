@@ -15,6 +15,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.network.chat.Component;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class MainMenuScreen extends OptionsSubScreen {
                         Component.translatable("interlinked.title")
                 )).build(),
 
-                Button.builder(Component.translatable("interlinked.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, "https://discord.gg/vfqEAn4YFy", false)).build(),
+                Button.builder(Component.translatable("interlinked.gui.ask_questions"), ConfirmLinkScreen.confirmLink(this, URI.create("https://discord.gg/vfqEAn4YFy"), false)).build(),
 
-                Button.builder(Component.translatable("interlinked.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, "https://github.com/Dillon8775/Interlinked/issues", false)).build()
+                Button.builder(Component.translatable("interlinked.gui.report_bugs"), ConfirmLinkScreen.confirmLink(this, URI.create("https://github.com/Dillon8775/Interlinked/issues"), false)).build()
         ));
 
         this.list.addSmall(options);
