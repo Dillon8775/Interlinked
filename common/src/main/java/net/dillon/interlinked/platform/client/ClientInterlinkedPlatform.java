@@ -18,11 +18,11 @@ public class ClientInterlinkedPlatform extends ClientModPlatform {
     @Override
     public List<PlatformMenuButton> menuButtons() {
         return List.of(
-                new PlatformMenuButton(
+                PlatformMenuButton.ofEmpty(
                         client().menuButton.enabled(),
                         client().menuButton.everywhere(),
-                        ClientMain.menuButton(getScreen()),
-                        spriteIconButton -> {})
+                        ClientMain.menuButton(getScreen())
+                )
         );
     }
 

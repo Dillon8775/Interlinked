@@ -1,7 +1,10 @@
 package net.dillon.interlinked.option;
 
+import net.dillon.dillonlib.annotation.Dill;
+import net.dillon.dillonlib.annotation.DillType;
 import net.dillon.dillonlib.util.BaseOptions;
 
+@Dill(DillType.CLIENT)
 public class ModClientOptions {
     public static ModClientOptionsHandler INSTANCE = new ModClientOptionsHandler();
     public MenuButton menuButton = MenuButton.EVERYWHERE;

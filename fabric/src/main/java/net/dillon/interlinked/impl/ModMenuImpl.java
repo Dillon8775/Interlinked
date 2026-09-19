@@ -2,6 +2,7 @@ package net.dillon.interlinked.impl;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import net.dillon.interlinked.screen.AbstractModScreen;
 import net.dillon.interlinked.screen.MainMenuScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

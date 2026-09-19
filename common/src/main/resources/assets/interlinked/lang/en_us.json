@@ -1,13 +1,16 @@
 {
   "interlinked.title": "Interlinked",
-  "interlinked.title.tooltip": "Configure Interlinked.",
+  "interlinked.title.tooltip": "Configure Interlinked settings.",
   "interlinked.title.menu": "Interlinked Main Menu",
-
   "interlinked.gui.update_available": "A newer version of Interlinked is available",
-  "interlinked.gui.manage_teams": "Manage Teams...",
-  "interlinked.gui.configure": "Configure...",
-  "interlinked.gui.report_bugs": "Report a bug...",
-  "interlinked.gui.ask_questions": "Ask questions...",
+
+  "interlinked.menu.settings": "§l§nSettings",
+  "interlinked.menu.questions_and_bugs": "§l§nQuestions and Bugs",
+
+  "interlinked.menu.manage_teams": "Manage Teams...",
+  "interlinked.menu.configure": "Configure...",
+  "interlinked.menu.report_bugs": "Report a bug...",
+  "interlinked.menu.ask_questions": "Ask questions...",
 
   "interlinked.options.client": "Client",
   "interlinked.options.client.description": "Client options for Interlinked.",
