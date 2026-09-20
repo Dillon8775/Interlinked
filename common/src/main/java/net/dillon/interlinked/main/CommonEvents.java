@@ -1,4 +1,4 @@
-package net.dillon.interlinked.event;
+package net.dillon.interlinked.main;
 
 /**
  * Common events for Interlinked.

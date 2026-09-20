@@ -4,5 +4,4 @@ dependencies {
     }
 
     implementation "maven.modrinth:dillon-lib:${project.mc_version}-${project.dillonlib_version}-neoforge"
-    implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-neoforge"
 }

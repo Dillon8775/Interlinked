@@ -3,17 +3,5 @@
   "interlinked.title.tooltip": "Configure Interlinked settings.",
   "interlinked.title.menu": "Interlinked Main Menu",
   "interlinked.gui.update_available": "A newer version of Interlinked is available",
-
-  "interlinked.menu.settings": "§l§nSettings",
-  "interlinked.menu.questions_and_bugs": "§l§nQuestions and Bugs",
-
-  "interlinked.menu.manage_teams": "Manage Teams...",
-  "interlinked.menu.configure": "Configure...",
-  "interlinked.menu.report_bugs": "Report a bug...",
-  "interlinked.menu.ask_questions": "Ask questions...",
-
-  "interlinked.options.client": "Client",
-  "interlinked.options.client.description": "Client options for Interlinked.",
-  "interlinked.options.menu_button": "Menu Button",
-  "interlinked.options.menu_button.description": "Determines where the Interlinked menu button should display.\n\nEverywhere → §7in the default position on the pause screen and title screen§r§f\n\nTitle Only → §7only on the title screen§r§f\n\nOFF → §7do not display the menu button at all. You should only disable this if you have another way of accessing the menu, via Mod Menu or (Neo)Forge's mod list."
+  "interlinked.link_inventories": "To link player inventories, download Shared Inventory: https://modrinth.com/mod/sharedinv"
 }

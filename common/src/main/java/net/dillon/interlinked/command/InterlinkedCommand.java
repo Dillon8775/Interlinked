@@ -199,20 +199,6 @@ public class InterlinkedCommand {
                                                                                 )
                                                                 )
                                                                 .then(
-                                                                        Commands.literal(DataNames.INVENTORY_LINK.getId())
-                                                                                .then(
-                                                                                        Commands.argument(TEAM_VALUE_ARGUMENT, BoolArgumentType.bool())
-                                                                                                .executes(context ->
-                                                                                                        modifyTeamData(
-                                                                                                                context,
-                                                                                                                StringArgumentType.getString(context, TEAM_NAME_ARGUMENT),
-                                                                                                                DataNames.INVENTORY_LINK.getId(),
-                                                                                                                BoolArgumentType.getBool(context, TEAM_VALUE_ARGUMENT)
-                                                                                                        )
-                                                                                                )
-                                                                                )
-                                                                )
-                                                                .then(
                                                                         Commands.literal(DataNames.FRIENDLY_FIRE.getId())
                                                                                 .then(
                                                                                         Commands.argument(TEAM_VALUE_ARGUMENT, BoolArgumentType.bool())
@@ -241,7 +227,6 @@ public class InterlinkedCommand {
                                                                                 300,
                                                                                 false,
                                                                                 false,
-                                                                                false,
                                                                                 false
                                                                         )
                                                                 )
@@ -259,7 +244,6 @@ public class InterlinkedCommand {
                                                                                                 300,
                                                                                                 false,
                                                                                                 false,
-                                                                                                false,
                                                                                                 false
                                                                                         )
                                                                                 )
@@ -272,25 +256,21 @@ public class InterlinkedCommand {
                                                                                                                                 .then(
                                                                                                                                         Commands.argument(HEART_PER_PLAYER, BoolArgumentType.bool())
                                                                                                                                                 .then(
-                                                                                                                                                        Commands.argument(INV_LINK_ARGUMENT, BoolArgumentType.bool())
-                                                                                                                                                                .then(
-                                                                                                                                                                        Commands.argument(FRIENDLY_FIRE_ARGUMENT, BoolArgumentType.bool())
-                                                                                                                                                                                .executes(context ->
-                                                                                                                                                                                        createTeam(
-                                                                                                                                                                                                context,
-                                                                                                                                                                                                StringArgumentType.getString(context, TEAM_NAME_ARGUMENT),
-                                                                                                                                                                                                EntityArgument.getPlayer(context, PLAYER_LEADER_ARGUMENT).getScoreboardName(),
-                                                                                                                                                                                                List.of(
-                                                                                                                                                                                                        EntityArgument.getPlayer(context, PLAYER_LEADER_ARGUMENT).getScoreboardName()
-                                                                                                                                                                                                ),
-                                                                                                                                                                                                BoolArgumentType.getBool(context, TELE_LINK_ARGUMENT),
-                                                                                                                                                                                                IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
-                                                                                                                                                                                                BoolArgumentType.getBool(context, HEALTH_LINK_ARGUMENT),
-                                                                                                                                                                                                BoolArgumentType.getBool(context, HEART_PER_PLAYER),
-                                                                                                                                                                                                BoolArgumentType.getBool(context, INV_LINK_ARGUMENT),
-                                                                                                                                                                                                BoolArgumentType.getBool(context, FRIENDLY_FIRE_ARGUMENT)
-                                                                                                                                                                                        )
-                                                                                                                                                                                )
+                                                                                                                                                        Commands.argument(FRIENDLY_FIRE_ARGUMENT, BoolArgumentType.bool())
+                                                                                                                                                                .executes(context ->
+                                                                                                                                                                        createTeam(
+                                                                                                                                                                                context,
+                                                                                                                                                                                StringArgumentType.getString(context, TEAM_NAME_ARGUMENT),
+                                                                                                                                                                                EntityArgument.getPlayer(context, PLAYER_LEADER_ARGUMENT).getScoreboardName(),
+                                                                                                                                                                                List.of(
+                                                                                                                                                                                        EntityArgument.getPlayer(context, PLAYER_LEADER_ARGUMENT).getScoreboardName()
+                                                                                                                                                                                ),
+                                                                                                                                                                                BoolArgumentType.getBool(context, TELE_LINK_ARGUMENT),
+                                                                                                                                                                                IntegerArgumentType.getInteger(context, TELE_LINK_DISTANCE_ARGUMENT),
+                                                                                                                                                                                BoolArgumentType.getBool(context, HEALTH_LINK_ARGUMENT),
+                                                                                                                                                                                BoolArgumentType.getBool(context, HEART_PER_PLAYER),
+                                                                                                                                                                                BoolArgumentType.getBool(context, FRIENDLY_FIRE_ARGUMENT)
+                                                                                                                                                                        )
                                                                                                                                                                 )
                                                                                                                                                 )
                                                                                                                                 )

@@ -66,7 +66,6 @@ public class TeamManager {
             int teleportDistance,
             boolean healthLink,
             boolean heartPerPlayer,
-            boolean invLink,
             boolean friendlyFire) {
         updateCommon(common -> {
             if (getTeamByName(name) != null) {
@@ -81,7 +80,6 @@ public class TeamManager {
                                 teleportDistance,
                                 healthLink,
                                 heartPerPlayer,
-                                invLink,
                                 friendlyFire
                         )
                 );
@@ -145,12 +143,9 @@ public class TeamManager {
             data.setHeartPerPlayer((Boolean) value);
             argumentMessage = DataNames.HEART_PER_PLAYER.getName();
 
-        } else if (argument.equals(DataNames.INVENTORY_LINK.getId())) {
-            data.setInvLink((Boolean) value);
-            argumentMessage = DataNames.INVENTORY_LINK.getName();
         } else if (argument.equals(DataNames.FRIENDLY_FIRE.getId())) {
             data.setFriendlyFire((Boolean) value);
-            argumentMessage = DataNames.INVENTORY_LINK.getName();
+            argumentMessage = DataNames.FRIENDLY_FIRE.getName();
         }
 
         ModCommonOptions.INSTANCE.save();
@@ -319,11 +314,6 @@ public class TeamManager {
 
         context.getSource().sendSuccess(
                 () -> Component.literal("Heart Per Player: " + data.heartPerPlayer),
-                false
-        );
-
-        context.getSource().sendSuccess(
-                () -> Component.literal("Inventory Link: " + data.invLink),
                 false
         );
 

@@ -2,29 +2,11 @@ package net.dillon.interlinked.platform.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.dillon.dillonlib.platform.client.ClientModPlatform;
-import net.dillon.dillonlib.platform.info.PlatformMenuButton;
 import net.dillon.interlinked.helper.ModConstants;
-import net.dillon.interlinked.main.ClientMain;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.player.LocalPlayer;
 
-import java.util.List;
-
-import static net.dillon.dillonlib.task.ClientTasks.getScreen;
-import static net.dillon.interlinked.option.OptionInstances.client;
-
 public class ClientInterlinkedPlatform extends ClientModPlatform {
-
-    @Override
-    public List<PlatformMenuButton> menuButtons() {
-        return List.of(
-                PlatformMenuButton.ofEmpty(
-                        client().menuButton.enabled(),
-                        client().menuButton.everywhere(),
-                        ClientMain.menuButton(getScreen())
-                )
-        );
-    }
 
     @Override
     public String modId() {

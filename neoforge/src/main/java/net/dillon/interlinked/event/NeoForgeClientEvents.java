@@ -1,6 +1,7 @@
 package net.dillon.interlinked.event;
 
 import net.dillon.interlinked.helper.ModConstants;
+import net.dillon.interlinked.main.ClientEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

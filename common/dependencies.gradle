@@ -9,7 +9,4 @@ dependencies {
     }
 
     compileOnly "maven.modrinth:dillon-lib:${project.mc_version}-${project.dillonlib_version}-fabric"
-    compileOnly ("dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric") {
-        transitive = false
-    }
 }

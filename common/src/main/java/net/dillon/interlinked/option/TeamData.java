@@ -11,7 +11,6 @@ import java.util.List;
  * <p>{@code teleLinkDistance} the maximum distances that players can go away from the team leader before they are teleported to them (default = 300 blocks)
  * <p>{@code healthLink} links player health with team leader
  * <p>{@code heartPerPlayer} gives all players an extra heart based on team size
- * <p>{@code invLink} links all player inventories with team leader
  * <p>{@code friendlyFire} prevents players on team from damaging each other</p>
  */
 public class TeamData {
@@ -22,7 +21,6 @@ public class TeamData {
     public int teleLinkDistance;
     public boolean healthLink;
     public boolean heartPerPlayer;
-    public boolean invLink;
     public boolean friendlyFire;
 
     public TeamData(
@@ -33,7 +31,6 @@ public class TeamData {
             int teleportDistance,
             boolean healthLink,
             boolean heartPerPlayer,
-            boolean invLink,
             boolean friendlyFire
     ) {
        this.name = name;
@@ -43,7 +40,6 @@ public class TeamData {
        this.teleLinkDistance = teleportDistance;
        this.healthLink = healthLink;
        this.heartPerPlayer = heartPerPlayer;
-       this.invLink = invLink;
        this.friendlyFire = friendlyFire;
     }
 
@@ -65,10 +61,6 @@ public class TeamData {
 
     public void setHeartPerPlayer(boolean value) {
         this.heartPerPlayer = value;
-    }
-
-    public void setInvLink(boolean value) {
-        this.invLink = value;
     }
 
     public void setFriendlyFire(boolean value) {

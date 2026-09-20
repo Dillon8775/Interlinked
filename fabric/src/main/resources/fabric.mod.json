@@ -21,9 +21,6 @@
     ],
     "client": [
       "net.dillon.interlinked.ClientInterlinked"
-    ],
-    "modmenu": [
-      "net.dillon.interlinked.impl.ModMenuImpl"
     ]
   },
   "mixins": [
@@ -38,8 +35,7 @@
     "dillonlib": ">=${dillonlib_version}"
   },
   "suggests": {
-    "modmenu": "*",
-    "yacl": "*"
+    "modmenu": "*"
   },
   "custom": {
     "modmenu": {

@@ -15,23 +15,9 @@ public class OptionInstances {
     }
 
     /**
-     * @return the client options.
-     */
-    public static ModClientOptions client() {
-        return ModClientOptions.INSTANCE.getInstance();
-    }
-
-    /**
      * Updates the common option instance.
      */
     public static void updateCommon(Consumer<ModCommonOptions> common) {
         ModCommonOptions.INSTANCE.update(common);
-    }
-
-    /**
-     * Updates the client option instance.
-     */
-    public static void updateClient(Consumer<ModClientOptions> common) {
-        ModClientOptions.INSTANCE.update(common);
     }
 }
