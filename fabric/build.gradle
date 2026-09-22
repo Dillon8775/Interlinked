@@ -110,4 +110,5 @@ modrinth {
         required.project "balm"
         required.project "dillon-lib"
     }
+    environment = "server_only_client_optional"
 }
