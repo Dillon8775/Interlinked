@@ -11,6 +11,6 @@ dependencies {
     implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     implementation "net.litetex.mcm:dev-auth-neo:${project.devauth_neo_version}"
 
-//    runtimeOnly "maven.modrinth:quality-of-queso:${project.qoq_version}"
-//    runtimeOnly "maven.modrinth:simple-keybinds:${project.simple_keybinds_version}"
+    runtimeOnly "net.dillon.qualityofqueso:qualityofqueso-fabric-mc26.3:unspecified"
+    runtimeOnly "net.dillon.simplekeybinds:simplekeybinds-fabric-mc26.3:unspecified"
 }

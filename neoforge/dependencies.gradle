@@ -4,4 +4,7 @@ dependencies {
     }
 
     implementation "net.dillon.dillonlib:dillonlib-neoforge-mc26.3:unspecified"
+
+    runtimeOnly "net.dillon.qualityofqueso:qualityofqueso-fabric-mc26.3:unspecified"
+    runtimeOnly "net.dillon.simplekeybinds:simplekeybinds-fabric-mc26.3:unspecified"
 }
